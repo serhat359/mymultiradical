@@ -55,9 +55,11 @@ function sendget(sendmessage,callback,cgi_override)
 	
 	var a = sendmessage.split("&")[0];
 	var b = a.split("=")[1];
-	var idlist = b.split(" ");
+	var idlistStr = b.split(" ");
 	
-	var resultText = searchForId(idlist[0]);
+	var idlist = idlistStr.map(x => parseInt(x));
+	
+	var resultText = searchForId(idlist);
 	
 	callback(resultText);
 	
