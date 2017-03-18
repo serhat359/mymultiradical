@@ -45,7 +45,7 @@ function searchForId(id){
 		buttons: buttonJoined
 	};
 	
-	return JSON.stringify(returnObj);
+	return returnObj;
 }
 
 function groupBy(arr, prop) {

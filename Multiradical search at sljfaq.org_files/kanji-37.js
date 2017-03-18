@@ -265,7 +265,7 @@ var kanji_results;
 
 function mr_show_kanji_list(data)
 {
-	var kanji_match = parse_json(data);
+	var kanji_match = data;
 	if(!kanji_match)
 		{return;}
 	var n_kanji=kanji_match.n_results;
