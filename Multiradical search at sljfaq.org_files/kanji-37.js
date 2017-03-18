@@ -83,7 +83,7 @@ function sendget(sendmessage,callback,cgi_override)
 		if(self.xmlhttp.readyState==4){
 			if(self.xmlhttp.status==200){
 				callback(self.xmlhttp.responseText);
-			}
+}
 		}
 	}
 	this.xmlhttp.send();*/
@@ -124,11 +124,50 @@ KanjiResults.prototype.overflow_button=function()
 this.clear_down_button();var above=this.offset-this.scrolled_numbers;if(!this.silly_remaining&&remaining>0){var below=this.n_kanji-(above+this.max_cells-this.numbers[this.scroll]);var downbutton=create_text_node("a",this.down_button,"▼"+below+" more");}
 this.clear_up_button();if(this.offset!=0){var upbutton=create_text_node("a",this.up_button,"▲"+above+" more");}
 else{if(!this.silly_remaining&&remaining>0){upbutton=create_text_node("a",this.up_button,"▲ 0 more");upbutton.className="deadupbutton";}}}
+
 KanjiResults.prototype.show=function()
-{this.clear();var max=this.kanji.length;var remaining=0;this.silly_remaining=false;if(this.offset+this.max_cells<max){max=this.offset+this.max_cells;remaining=this.kanji.length-max;if(remaining<this.silly_amount){max=this.kanji.length;this.silly_remaining=true;}}
-var displayed_kanji=0;var table=create_node("table",this.found_kanji);var tbody=create_node("tbody",table);var tr;var link_preference=get_link_preference();var window_preference=get_window_preference();for(var k=this.offset;k<max;k++){if((k-this.offset)%this.columns==0)
-tr=create_node("tr",tbody);var td=create_node("td",tr);if(this.kanji[k].match(/^\d+$/)){append_text(td,this.kanji[k]);td.className="number";}else{create_link(td,this.kanji[k],window_preference);displayed_kanji++;}}
-if(k>=this.max_cells+this.offset||this.offset>0){this.overflow_button(this.silly_remaining);}}
+{
+	this.clear();
+	var max=this.kanji.length;
+	var remaining=0;
+	this.silly_remaining=false;
+	
+	if(this.offset+this.max_cells<max){
+		max=this.offset+this.max_cells;
+		remaining=this.kanji.length-max;
+		if(remaining<this.silly_amount){
+			max=this.kanji.length;this.silly_remaining=true;
+		}
+	}
+	
+	var displayed_kanji=0;
+	var table=create_node("table",this.found_kanji);
+	var tbody=create_node("tbody",table);
+	var tr;
+	var link_preference=get_link_preference();
+	var window_preference=get_window_preference();
+	
+	for(var k=this.offset;k<max;k++){
+		if((k-this.offset)%this.columns==0)
+			tr=create_node("tr",tbody);
+		
+		var td=create_node("td",tr);
+		
+		if(this.kanji[k].match(/^\d+$/)){
+			append_text(td,this.kanji[k]);
+			td.className="number";
+		}
+		else{
+			create_link(td,this.kanji[k],window_preference);
+			displayed_kanji++;
+		}
+	}
+
+	if(k>=this.max_cells+this.offset||this.offset>0){
+		this.overflow_button(this.silly_remaining);
+	}
+}
+
 var link_cookie_string="link=";function set_link_preference(link)
 {set_cookie(link_cookie_string+link);}
 function get_link_preference()
@@ -157,11 +196,36 @@ var use_input_box=false;var input_box_cookie="wbv=";function write_kanji(kanji)
 else{var value=input_box_el.value;var s=input_box_el.selectionStart;var e=input_box_el.selectionEnd;var v_start=value.substring(0,input_box_el.selectionStart);var v_end=value.substring(input_box_el.selectionEnd,value.length);value=v_start+kanji+v_end;input_box_el.value=value;input_box_el.selectionStart=s+kanji.length;input_box_el.selectionEnd=input_box_el.selectionStart;}}
 else{input_box_el.value+=kanji;}
 input_box_el.focus();set_cookie(input_box_cookie+encodeURIComponent(input_box_el.value));}
+
 function create_link(parent,kanji,window_preference)
-{if(use_input_box){var write_kanji_el=create_text_node("span",parent,kanji);write_kanji_el.className="write_kanji";write_kanji_el.onclick=function(){write_kanji(kanji);}}
-else if(iframe){var write_kanji_el=create_text_node("span",parent,kanji);write_kanji_el.className="write_kanji";write_kanji_el.onclick=function(){window.parent.postMessage(kanji,"*");}}
-else{var make_link=true;var link_preference=get_link_preference();if(link_preference=='no_link'){make_link=false;}
-if(make_link){var href='minidic.cgi?r='+encodeURIComponent(kanji);var anchor=create_text_node("a",parent,kanji);anchor.href=href;if(window_preference=="1"){anchor.onclick=function(){window.open(this.href);return false;}}}else{append_text(parent,kanji);parent.className="unlinked_kanji";}}}
+{
+	if(use_input_box){var write_kanji_el=create_text_node("span",parent,kanji);write_kanji_el.className="write_kanji";write_kanji_el.onclick=function(){write_kanji(kanji);}}
+	else if(iframe){var write_kanji_el=create_text_node("span",parent,kanji);write_kanji_el.className="write_kanji";write_kanji_el.onclick=function(){window.parent.postMessage(kanji,"*");}}
+	else{
+		var make_link=true;
+		var link_preference=get_link_preference();
+		
+		if(link_preference=='no_link'){make_link=false;}
+		
+		if(make_link){
+			// old href base
+			//var hrefBase = 'minidic.cgi?r=';
+			var hrefBase = 'http://tangorin.com/kanji/';
+			var href = hrefBase + encodeURIComponent(kanji);
+			var anchor=create_text_node("a",parent,kanji);
+			anchor.href=href;
+			
+			if(window_preference=="1"){
+				anchor.onclick=function(){window.open(this.href);return false;}
+			}
+		}
+		else{
+			append_text(parent,kanji);
+			parent.className="unlinked_kanji";
+		}
+	}
+}
+
 function clear_input_box()
 {var el=document.getElementById("input_box_input");if(el){el.value="";el.focus();}
 delete_cookie(input_box_cookie);}
