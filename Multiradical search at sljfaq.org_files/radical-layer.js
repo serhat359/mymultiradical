@@ -1,8 +1,8 @@
 
-// gets id in int format
-function searchForId(id){
+// gets id in int[] format
+function searchForId(idArr){
 
-	var foundRadicals = radicals.filter(x => containsAll(id, x.Radicals));
+	var foundRadicals = radicals.filter(x => containsAll(x.Radicals, idArr));
 	
 	n_results = foundRadicals.length;
 	//alert(n_results); // DONE!!!!
@@ -12,7 +12,7 @@ function searchForId(id){
 	var tempArr = [];
 	for(var key in grouped){
 		var val = grouped[key];
-			
+		
 		var binded = key + val.map(x => x.Kanji).join("");
 		tempArr.push(binded);
 	}
@@ -23,18 +23,18 @@ function searchForId(id){
 	var buttons = [];
 	
 	for (var i = 1; i <= 253; i++)
-    {
-        var c;
+	{
+		var c;
 
-		if(id.some(x => x == i))
+		if(idArr.some(x => x == i))
 			c = 'C';
-        else if (foundRadicals.some(x => x.Radicals.some(y => y == i)))
-            c = 'P';
-        else
-            c = 'I';
+		else if (foundRadicals.some(x => x.Radicals.some(y => y == i)))
+			c = 'P';
+		else
+			c = 'I';
 
-        buttons.push(c);
-    }
+		buttons.push(c);
+	}
 	
 	var buttonJoined = buttons.join("");
 	//alert(buttonJoined); // DONE!!!!
@@ -55,11 +55,11 @@ function groupBy(arr, prop) {
 	}, {});
 }
 
-function containsAll(needles, haystack){ 
+function containsAll(haystack, needles){ 
 	for(var i = 0, len = needles.length; i < len; i++){
 		if(haystack.indexOf(needles[i]) == -1) return false;
 	}
 	return true;
 }
 
-//var result = searchForId(1);
+//var result = searchForId([1,2,3]);

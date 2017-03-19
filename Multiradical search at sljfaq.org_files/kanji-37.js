@@ -59,9 +59,9 @@ function sendget(sendmessage,callback,cgi_override)
 	
 	var idlist = idlistStr.map(x => parseInt(x));
 	
-	var resultText = searchForId(idlist);
+	var result = searchForId(idlist);
 	
-	callback(resultText);
+	callback(result);
 	
 	// obsolete code
 	/*var cgi;
