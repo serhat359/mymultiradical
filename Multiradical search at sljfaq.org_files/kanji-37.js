@@ -304,7 +304,7 @@ var pressed=gup("b");if(typeof(pressed)=="string"&&pressed.length>0){mr_push_but
 else if(typeof(pressed)=="object"){for(var i=0;i<pressed.length;i++){mr_push_button(pressed[i]);}}}
 
 FourCorner.prototype.addResult=function(fc_result_json)
-{var fc_result=parse_json(fc_result_json);var buttons=fc_result.buttons;var button_states=buttons.split("");for(var cn=0;cn<5;cn++){for(var bn=0;bn<10;bn++){var state;var i=cn*10+bn;if(button_states[i]=="I"){state="invalid";}else if(button_states[i]=="P"){state="choice";}else if(button_states[i]=="C"){state="chosen";}
+{var fc_result=fc_result_json;var buttons=fc_result.buttons;var button_states=buttons.split("");for(var cn=0;cn<5;cn++){for(var bn=0;bn<10;bn++){var state;var i=cn*10+bn;if(button_states[i]=="I"){state="invalid";}else if(button_states[i]=="P"){state="choice";}else if(button_states[i]=="C"){state="chosen";}
 var button=this.states[cn][bn].button;this.states[cn][bn].state=state;button.className=state;}}
 this.kanji_results=new KanjiResults(fc_result.results,fc_result.n_results);this.kanji_results.show();}
 
