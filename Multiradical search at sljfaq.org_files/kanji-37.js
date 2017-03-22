@@ -97,11 +97,11 @@ var iframe=false;
 
 function KanjiResults(kanji,n_kanji)
 {this.found_kanji=getbyid("found_kanji");this.down_button=getbyid("down_button");this.up_button=getbyid("up_button");this.kanji=kanji.match(/\d+|./g);this.n_kanji=n_kanji;var self=this;this.down_button.onclick=function(){self.go_down();}
-this.up_button.onclick=function(){self.go_up();}
-if(typeof(results_table_columns)=="undefined"){this.columns=10;}
-else{this.columns=results_table_columns;}
-if(typeof(max_kanji)=="undefined"){this.max_cells=100;}
-else{this.max_cells=max_kanji;}
+	this.up_button.onclick = function(){self.go_up();}
+	if(typeof(results_table_columns)=="undefined"){this.columns=10;}
+	else{this.columns=results_table_columns;}
+	if(typeof(max_kanji)=="undefined"){this.max_cells=100;}
+	else{this.max_cells=max_kanji;}
 this.silly_amount=20;this.offset=0;this.scroll=0;this.scrolled_numbers=0;this.numbers=new Array();var max_numbers=Math.floor(n_kanji/this.max_cells);for(var j=0;j<=max_numbers;j++){this.numbers[j]=0;}
 for(var i=0;i<n_kanji;i++){var j=Math.floor(i/this.max_cells);if(this.kanji[i].match(/^\d+$/)){this.numbers[j]++;}}}
 KanjiResults.prototype.adjust_scroll=function(chng)
@@ -158,7 +158,8 @@ KanjiResults.prototype.show=function()
 			td.className="number";
 		}
 		else{
-			create_link(td,this.kanji[k],window_preference);
+			//create_link(td,this.kanji[k],window_preference);
+			td.innerHTML = '<a>'+this.kanji[k]+'</a>';
 			displayed_kanji++;
 		}
 	}
