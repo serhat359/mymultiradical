@@ -2,7 +2,16 @@
 // gets id in int[] format
 function searchForId(idArr){
 
-	var foundRadicals = radicals.filter(x => containsAll(x.Radicals, idArr));
+	var foundRadicals = radicals.filter(x => {
+		for(var i = 0; i < idArr.length; i++){
+			var id = idArr[i];
+			
+			if(x.RadicalBits[id]){}
+			else{ return false; }
+		}
+		
+		return true;
+	});
 	
 	n_results = foundRadicals.length;
 	//alert(n_results); // DONE!!!!
@@ -28,7 +37,7 @@ function searchForId(idArr){
 
 		if(idArr.some(x => x == i))
 			c = 'C';
-		else if (foundRadicals.some(x => x.Radicals.some(y => y == i)))
+		else if (foundRadicals.some(x => x.RadicalBits[i]))
 			c = 'P';
 		else
 			c = 'I';
