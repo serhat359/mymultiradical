@@ -249,16 +249,13 @@ function mr_update_buttons(button_states)
 	if(!button_states)
 		return;
 	
-	for(i=0; i<n_radicals; i++){
-		var state=button_states.substring(i,i+1);
-		var radical_button=getbyid("rad_"+(i+1));
-		var className=radical_button.className;
-		className=className.replace(/\s*(invalid|choice|chosen)/g,"");
-		radical_button.className=className;
+	for(i=1; i<=n_radicals; i++){
+		var state = button_states.substring(i-1,i);
+		var radical_button = getbyid("rad_"+(i));
 		
-		if(state=="I")		{mr_button_states[i+1]=-1;radical_button.className+=' invalid';}
-		else if(state=="P")	{mr_button_states[i+1]= 0;radical_button.className+=' choice';}
-		else if(state=="C")	{mr_button_states[i+1]= 1;radical_button.className+=' chosen';}
+		if(state=="I")		{mr_button_states[i]=-1; radical_button.className = 'empty invalid';}
+		else if(state=="P")	{mr_button_states[i]= 0; radical_button.className = 'empty choice';}
+		else if(state=="C")	{mr_button_states[i]= 1; radical_button.className = 'empty chosen';}
 	}
 }
 
@@ -279,12 +276,16 @@ function mr_reset_buttons()
 {for(var i=1;i<=n_radicals;i++){var radid="rad_"+i;var r=getbyid(radid);var className=r.className;r.className=r.className.replace(/invalid|chosen/g,"choice");mr_chosens[i]=0;mr_button_states[i]=0;}
 mr_buttons_selected=0;kanji_results.clear();}
 function mr_push_button(radical_id)
-{if(mr_button_states[radical_id]==-1){return;}
+{
+	lastTime = performance.now();
+	if(mr_button_states[radical_id]==-1){return;}
 if(mr_chosens[radical_id]==1){mr_chosens[radical_id]=0;mr_buttons_selected--;}else{mr_chosens[radical_id]=1;mr_buttons_selected++;}
-if(mr_buttons_selected)
+	if(mr_buttons_selected)
 mr_get_kanji();else
-mr_reset_buttons();}
-
+mr_reset_buttons();
+	checkpoint("over");
+}
+	
 function mr_get_kanji()
 {
 	var params="M=";
@@ -303,7 +304,7 @@ function mr_start_buttons()
 {for(var i=1;i<=n_radicals;i++){var rad_i=getbyid("rad_"+i);(function(i){rad_i.onclick=function(){mr_push_button(i)};}(i));mr_button_states[i]=0;}
 var pressed=gup("b");if(typeof(pressed)=="string"&&pressed.length>0){mr_push_button(pressed);}
 else if(typeof(pressed)=="object"){for(var i=0;i<pressed.length;i++){mr_push_button(pressed[i]);}}}
-
+	
 FourCorner.prototype.addResult=function(fc_result_json)
 {var fc_result=fc_result_json;var buttons=fc_result.buttons;var button_states=buttons.split("");for(var cn=0;cn<5;cn++){for(var bn=0;bn<10;bn++){var state;var i=cn*10+bn;if(button_states[i]=="I"){state="invalid";}else if(button_states[i]=="P"){state="choice";}else if(button_states[i]=="C"){state="chosen";}
 var button=this.states[cn][bn].button;this.states[cn][bn].state=state;button.className=state;}}
@@ -351,3 +352,9 @@ function go_to(link)
 {location.href=link;}
 
 
+var lastTime = 0;
+function checkpoint(name){
+	var t1 = performance.now();
+	console.log("Call to " + name + " took " + (t1 - lastTime) + " milliseconds.");
+	lastTime = t1;
+}
