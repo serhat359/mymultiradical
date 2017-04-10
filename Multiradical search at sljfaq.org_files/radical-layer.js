@@ -1,4 +1,6 @@
 
+Array.prototype.hasAny = Array.prototype.some;
+
 // gets id in int[] format
 function searchForId(idArr){
 
@@ -35,9 +37,9 @@ function searchForId(idArr){
 	{
 		var c;
 
-		if(idArr.some(x => x == i))
+		if(idArr.hasAny(x => x == i))
 			c = 'C';
-		else if (foundRadicals.some(x => x.RadicalBits[i]))
+		else if (foundRadicals.hasAny(x => x.RadicalBits[i]))
 			c = 'P';
 		else
 			c = 'I';
