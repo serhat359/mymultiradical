@@ -1,6 +1,11 @@
 
 Array.prototype.hasAny = Array.prototype.some;
 
+//enum definition
+var C = -57;
+var P = -58;
+var I = -59;
+
 // gets id in int[] format
 function searchForId(idArr){
 
@@ -38,22 +43,19 @@ function searchForId(idArr){
 		var c;
 
 		if(idArr.hasAny(x => x == i))
-			c = 'C';
+			c = C;
 		else if (foundRadicals.hasAny(x => x.RadicalBits[i]))
-			c = 'P';
+			c = P;
 		else
-			c = 'I';
+			c = I;
 
 		buttons.push(c);
 	}
 	
-	var buttonJoined = buttons.join("");
-	//alert(buttonJoined); // DONE!!!!
-	
 	var returnObj = {
 		n_results: n_results,
 		results: joined,
-		buttons: buttonJoined
+		buttons: buttons
 	};
 	
 	return returnObj;

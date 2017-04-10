@@ -250,12 +250,20 @@ function mr_update_buttons(button_states)
 		return;
 	
 	for(i=1; i<=n_radicals; i++){
-		var state = button_states.substring(i-1,i);
+		var state = button_states[i-1];
 		var radical_button = getbyid("rad_"+(i));
 		
-		if(state=="I")		{mr_button_states[i]=-1; radical_button.className = 'empty invalid';}
-		else if(state=="P")	{mr_button_states[i]= 0; radical_button.className = 'empty choice';}
-		else if(state=="C")	{mr_button_states[i]= 1; radical_button.className = 'empty chosen';}
+		switch(state) {
+			case I:
+				{mr_button_states[i]=-1; radical_button.className = 'empty invalid';}
+				break;
+			case P:
+				{mr_button_states[i]= 0; radical_button.className = 'empty choice';}
+				break;
+			case C:
+				{mr_button_states[i]= 1; radical_button.className = 'empty chosen';}
+				break;
+		}
 	}
 }
 
