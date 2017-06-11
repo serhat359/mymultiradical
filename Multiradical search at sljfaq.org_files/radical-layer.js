@@ -6,30 +6,30 @@ var C = -57;
 var P = -58;
 var I = -59;
 
-// gets id in int[] format
+var cache = {};
+
+// idArr: [1,2,3]
 function searchForId(idArr){
 
-	var foundRadicals = radicals.filter(x => {
-		for(var i = 0; i < idArr.length; i++){
-			var id = idArr[i];
-			
-			if(x.RadicalBits[id]){}
-			else{ return false; }
-		}
-		
-		return true;
-	});
+	var ids = idArr.join(",");
+
+	var res = cache[ids];
+
+	if(res)
+		return res;
+
+	var foundRadicals = radicals.filter(x => containsAll(x.R, idArr));
 	
 	n_results = foundRadicals.length;
 	//alert(n_results); // DONE!!!!
 	
-	var grouped = groupBy(foundRadicals, 'Strokes');
+	var grouped = groupBy(foundRadicals, 'S');
 	
 	var tempArr = [];
 	for(var key in grouped){
 		var val = grouped[key];
 		
-		var binded = key + val.map(x => x.Kanji).join("");
+		var binded = key + val.map(x => x.K).join("");
 		tempArr.push(binded);
 	}
 	
@@ -44,7 +44,7 @@ function searchForId(idArr){
 
 		if(idArr.hasAny(x => x == i))
 			c = C;
-		else if (foundRadicals.hasAny(x => x.RadicalBits[i]))
+		else if (foundRadicals.hasAny(x => x.R.hasAny(y => y == i)))
 			c = P;
 		else
 			c = I;
@@ -58,6 +58,8 @@ function searchForId(idArr){
 		buttons: buttons
 	};
 	
+	cache[ids] = returnObj;
+
 	return returnObj;
 }
 
@@ -76,3 +78,9 @@ function containsAll(haystack, needles){
 }
 
 //var result = searchForId([1,2,3]);
+
+setTimeout(function(){
+	// cache single radicals
+	//for(var i = 1; i <= 253; i++) { searchForId([i]) }
+}, 5000);
+
