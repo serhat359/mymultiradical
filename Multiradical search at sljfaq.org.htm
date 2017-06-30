@@ -20,70 +20,7 @@ again with a different browser.</p>
 </div>
 </noscript>
 
-<table id="kanji_menu">
-<tbody><tr>
 
-
-<td onclick='go_to ("codes.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/codes.html">Input codes
-</a>
-</td>
-
-<td onclick='go_to ("mr.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/mr.html">Multiradical
-</a>
-</td>
-
-<td onclick='go_to ("draw.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/draw.html">Handwritten
-</a>
-</td>
-
-<td onclick='go_to ("four.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/four.html">Four-corner
-</a>
-</td>
-
-<td onclick='go_to ("soft-keyboard.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/soft-keyboard.html">Kana input
-</a>
-</td>
-</tr><tr>
-
-
-<td onclick='go_to ("radicals.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/radicals.html">Radicals
-</a>
-</td>
-<td class="page_tab chosen_tab">Multiradical (old)</td>
-
-<td onclick='go_to ("draw-canvas.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/draw-canvas.html">Handwritten (HTML5)
-</a>
-</td>
-
-<td onclick='go_to ("skip.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/skip.html">SKIP
-</a>
-</td>
-
-<td onclick='go_to ("option.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/option.html">Options
-</a>
-</td>
-</tr>
-</tbody></table>
-
-
-<div id="lang-switch">
-<small>
-Language:
-</small>
-<select id="lang_select" onchange="change_language()">
-<option value="mr-old.html" selected="selected">English</option><option value="mr-oldj.html">日本語</option><option value="mr-old.ru.html">Русский</option><option value="mr-old.es.html">Español</option><option value="mr-old.de.html">Deutsch</option><option value="mr-old.fr.html">Français</option><option value="mr-old.th.html">ไทย</option><option value="mr-old.ko.html">한국어</option><option value="mr-old.pt.html">Português</option><option value="mr-old.fi.html">Suomi</option><option value="mr-old.tr.html">Türkçe</option><option value="mr-old.zh-TW.html">中文（繁體）</option><option value="mr-old.zh-CN.html">中文（简体）</option><option value="mr-old.vi.html">Tiếng Việt</option><option value="mr-old.it.html">Italiano</option>
-</select>
-
-
-<div id="input_box_div" style="display:none;">
-<form action="#" id="input_box" onsubmit="return false;"> 
-<input size="20" id="input_box_input" type="search">
-<input onclick="clear_input_box ();" value="Clear" type="reset">
-<input onclick="search_input_box ();" value="Search" type="submit">
-</form> 
-</div>
-
-</div>
 <table id="master-table">
 <tbody><tr>
 <td rowspan="2" style="vertical-align:top;">
@@ -493,6 +430,72 @@ results_table_columns=9;
 </td>
 </tr>
 </tbody></table>
+
+
+<table id="kanji_menu">
+<tbody><tr>
+
+
+<td onclick='go_to ("codes.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/codes.html">Input codes
+</a>
+</td>
+
+<td onclick='go_to ("mr.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/mr.html">Multiradical
+</a>
+</td>
+
+<td onclick='go_to ("draw.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/draw.html">Handwritten
+</a>
+</td>
+
+<td onclick='go_to ("four.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/four.html">Four-corner
+</a>
+</td>
+
+<td onclick='go_to ("soft-keyboard.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/soft-keyboard.html">Kana input
+</a>
+</td>
+</tr><tr>
+
+
+<td onclick='go_to ("radicals.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/radicals.html">Radicals
+</a>
+</td>
+<td class="page_tab chosen_tab">Multiradical (old)</td>
+
+<td onclick='go_to ("draw-canvas.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/draw-canvas.html">Handwritten (HTML5)
+</a>
+</td>
+
+<td onclick='go_to ("skip.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/skip.html">SKIP
+</a>
+</td>
+
+<td onclick='go_to ("option.html");' class="page_tab not_chosen_tab"><a href="http://kanji.sljfaq.org/option.html">Options
+</a>
+</td>
+</tr>
+</tbody></table>
+
+
+<div id="lang-switch">
+<small>
+Language:
+</small>
+<select id="lang_select" onchange="change_language()">
+<option value="mr-old.html" selected="selected">English</option><option value="mr-oldj.html">日本語</option><option value="mr-old.ru.html">Русский</option><option value="mr-old.es.html">Español</option><option value="mr-old.de.html">Deutsch</option><option value="mr-old.fr.html">Français</option><option value="mr-old.th.html">ไทย</option><option value="mr-old.ko.html">한국어</option><option value="mr-old.pt.html">Português</option><option value="mr-old.fi.html">Suomi</option><option value="mr-old.tr.html">Türkçe</option><option value="mr-old.zh-TW.html">中文（繁體）</option><option value="mr-old.zh-CN.html">中文（简体）</option><option value="mr-old.vi.html">Tiếng Việt</option><option value="mr-old.it.html">Italiano</option>
+</select>
+
+
+<div id="input_box_div" style="display:none;">
+<form action="#" id="input_box" onsubmit="return false;"> 
+<input size="20" id="input_box_input" type="search">
+<input onclick="clear_input_box ();" value="Clear" type="reset">
+<input onclick="search_input_box ();" value="Search" type="submit">
+</form> 
+</div>
+
+</div>
 
 
 <div style="clear:both;padding:20px;">
