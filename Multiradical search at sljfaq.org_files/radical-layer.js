@@ -44,7 +44,7 @@ function searchForId(idArr){
 
 		if(idArr.hasAny(x => x == i))
 			c = C;
-		else if (foundRadicals.hasAny(x => x.R.hasAny(y => y == i)))
+		else if (foundRadicals.hasAny(x => binaryIndexOf(x.R, i) >= 0 ) )
 			c = P;
 		else
 			c = I;
@@ -72,7 +72,7 @@ function groupBy(arr, prop) {
 
 function containsAll(haystack, needles){ 
 	for(var i = 0, len = needles.length; i < len; i++){
-		if(haystack.indexOf(needles[i]) == -1) return false;
+		if(binaryIndexOf(haystack,needles[i]) == -1) return false;
 	}
 	return true;
 }
@@ -84,3 +84,28 @@ setTimeout(function(){
 	//for(var i = 1; i <= 253; i++) { searchForId([i]) }
 }, 5000);
 
+function binaryIndexOf(arr, searchElement) {
+    'use strict';
+ 
+    var minIndex = 0;
+    var maxIndex = arr.length - 1;
+    var currentIndex;
+    var currentElement;
+ 
+    while (minIndex <= maxIndex) {
+        currentIndex = (minIndex + maxIndex) / 2 | 0;
+        currentElement = arr[currentIndex];
+ 
+        if (currentElement < searchElement) {
+            minIndex = currentIndex + 1;
+        }
+        else if (currentElement > searchElement) {
+            maxIndex = currentIndex - 1;
+        }
+        else {
+            return currentIndex;
+        }
+    }
+ 
+    return -1;
+}

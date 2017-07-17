@@ -58,9 +58,9 @@ function sendget(sendmessage,callback,cgi_override)
 	var idlistStr = b.split(" ");
 	
 	var idlist = idlistStr.map(x => parseInt(x));
-	
+
 	var result = searchForId(idlist);
-	
+
 	callback(result);
 	
 	// obsolete code
@@ -290,21 +290,20 @@ function mr_push_button(radical_id)
 if(mr_chosens[radical_id]==1){mr_chosens[radical_id]=0;mr_buttons_selected--;}else{mr_chosens[radical_id]=1;mr_buttons_selected++;}
 	if(mr_buttons_selected)
 mr_get_kanji();else
-mr_reset_buttons();
+		mr_reset_buttons();
 	checkpoint("over");
 }
-	
+
 function mr_get_kanji()
 {
-	var params="M=";
 	var m_buttons=new Array();
 	
 	for(radical in mr_chosens)
 		if(mr_chosens[radical]==1)
 			m_buttons.push(radical);
-		
-	params += m_buttons.join(" ");
-	params += "&o=j";
+	
+	var params = "M=" + m_buttons.join(" ") + "&o=j";
+
 	sendget(params, mr_show_kanji_list);
 }
 
