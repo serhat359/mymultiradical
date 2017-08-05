@@ -1,5 +1,5 @@
 body {
-font-family:Sans-serif;
+font-family:Sans-serif,Meiryo;
 }
 h1 {
 font-size: 1.5em;
@@ -45,7 +45,7 @@ background-image:url(radimg.png);
 #found_kanji a {
 text-decoration:none;
 color: #007;
-font-size:23px;
+font-size:26px;
 text-align:center;
 vertical-align:middle;
 }
