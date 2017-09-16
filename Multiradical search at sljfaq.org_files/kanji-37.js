@@ -281,8 +281,21 @@ function mr_show_kanji_list(data)
 }
 
 function mr_reset_buttons()
-{for(var i=1;i<=n_radicals;i++){var radid="rad_"+i;var r=getbyid(radid);var className=r.className;r.className=r.className.replace(/invalid|chosen/g,"choice");mr_chosens[i]=0;mr_button_states[i]=0;}
-mr_buttons_selected=0;kanji_results.clear();}
+{
+	for(var i=1; i<=n_radicals; i++){
+		var radid="rad_"+i;
+		var r=getbyid(radid);
+		
+		r.className = "empty choice";
+		
+		mr_chosens[i]=0;
+		mr_button_states[i]=0;
+	}
+
+	mr_buttons_selected=0;
+	kanji_results.clear();
+}
+
 function mr_push_button(radical_id)
 {
 	lastTime = performance.now();
